@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+    // ajax to get the top 10 highest score
     $.ajax({
         url: "getHighestScore.php"
       }).done(function(data) {
@@ -7,10 +8,12 @@ $( document ).ready(function() {
             $("#highestScore tbody").html($score);
             }
         })  
+    // starting the game
     $("#NameForm").submit(function(event){
         event.preventDefault();
         myName = $("#name").val();
         console.log(myName)
+        // Testing if the name input is not empty
         if (myName != ""){
             $("#game").text("");
             $("#name").css('border-color','grey')
@@ -18,9 +21,7 @@ $( document ).ready(function() {
             $("#hello").text("Hello "+ myName)
             timer = 60;
             score = 0;
-            $(".hole").each(function(){
-            })
-            
+            // showing the button in the holes and counting the score
             var holeTime = setInterval(function() {
                 var random = Math.floor(Math.random() * 6) + 1;
                 $("#hole"+random).html("<button id='mole"+random+"'>here</button>");
@@ -28,15 +29,14 @@ $( document ).ready(function() {
                 $("#mole"+random).click(function(){
                     score++;
                     $(this).fadeOut();
-                    console.log(score)
                 })
             }, 1000)
-
+            // counting the time limit of the game which is 1min
             var intTime = setInterval(function() {
                 time = $("#time").text();
                 timer = timer - 1;
                 $("#time").text(timer);
-                if (timer == 50) {
+                if (timer == 0) {
                     clearInterval(holeTime);
                     clearInterval(intTime);
                     $("#game").text("The game is over. Here is your score : "+ score);
