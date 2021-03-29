@@ -1,0 +1,10 @@
+.hole {
+	height: 25%;
+	margin: 10px;
+	border: solid 1px grey;	
+	border-radius: 50%;
+	background-color: black;
+    text-align: center;
+    padding: 10% 0;
+    color: white;
+}
